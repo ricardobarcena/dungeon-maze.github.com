@@ -1,0 +1,98 @@
+*{
+font-family:tahoma, sans serif;
+}
+
+body{
+background-color:#2B3E42;
+}
+
+
+h1{
+font-family: tahoma;
+color:#2B3E42;
+text-align:center;
+font-size:30px;
+}
+
+h2{
+font-size:16px;
+font-family: Tahoma;
+font-weight:bold;
+text-decoration:underline;
+color:#0174DF;
+}
+
+p{
+font-size:12px;
+}
+
+/*Reglas del juego*/
+
+#aviso{
+text-align:center;
+font-weight:bold;
+}
+
+#container{
+width:600px;
+background-color:white;
+border:solid silver 3px;
+padding:40px;
+margin:40px auto;
+text-align:justify;
+float:left;
+background-color:#F7F3E8;
+}
+
+/*Selección de personajes*/
+
+#botonInicio{
+margin:265px;
+}
+
+#container2{
+width:600px;
+border:solid silver 3px;
+padding:40px;
+margin:40px auto;
+float:right;
+background-color:#F7F3E8;
+}
+
+#container3{
+width:1024px;
+height:568px;
+border:solid silver 3px;
+padding:40px;
+margin:25px auto;
+float:center;
+background-color:#F7F3E8;
+}
+
+/*Ventana del juego*/ 
+
+#area {
+	margin: 0 auto;
+	text-align: center;
+	background-color: #D7D7D7;
+}
+
+#juego{
+width:640px;
+height:480px;
+margin:auto;
+
+}
+
+#seleccionJugadores li{
+display:inline;
+margin:30px;
+}
+
+#back{
+text-align:center;
+}
+
+
+
+
