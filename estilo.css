@@ -46,8 +46,8 @@ background-color:#F7F3E8;
 
 /*Selección de personajes*/
 
-#botonInicio{
-margin:265px;
+form{
+margin-left:40%;
 }
 
 #container2{
@@ -72,9 +72,9 @@ background-color:#F7F3E8;
 /*Ventana del juego*/ 
 
 #area {
-	margin: 0 auto;
-	text-align: center;
-	background-color: #D7D7D7;
+margin: 0 auto;
+text-align: center;
+background-color: #D7D7D7;
 }
 
 #juego{
