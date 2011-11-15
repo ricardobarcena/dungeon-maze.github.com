@@ -5,11 +5,12 @@
 		$('#Valkiria').corner();
 		var seleccionado="";
 		var personajes=['Guerrero','Clérigo','Valkiria'];
-		$('form').hide();
+		$('#ingreso').hide();
 		
 		$('#seleccionJugadores li img').click(function(){
 			if(seleccionado==this.id){		
 				seleccionado="";
+				$('#ingreso').hide();
 				validarSeleccion=false;
 				$('#'+this.id).css('border','none');  
 			}else{		
@@ -23,7 +24,7 @@
 				}
 
 			seleccionado=this.id;
-			$('form').show();
+			$('#ingreso').show();
 			$('#Guerrero').css('border','none');
 			$('#Clérigo').css('border','none');
 			$('#Valkiria').css('border','none');
