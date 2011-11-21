@@ -8,14 +8,37 @@
 <link rel="stylesheet" href="estilo.css"/>
 </head>
 
-<body>
+<body onLoad="init();">
 <div id="container3">
 	<h1>Ahora puedes comenzar a jugar a Dungeon Maze</h1>
-		<div id="juego">
-				<canvas id="area" width="640" height="480"></canvas>
-		</div>
-<p id="back">Volver al <a href="index.html">inicio</a> del juego</p>
+<div id="container2">
+<h1>Elige tu avatar</h1>
+				<ul id="seleccionJugadores">
+					<li>
+						<img src="img/foto2.jpg" alt="Zerg" id="Guerrero"/>
+					</li>
+					<li>
+						<img src="img/foto1.jpg" alt="Terran" id="Clérigo"/>
+					</li>
+					<li>
+						<img src="img/foto3.jpg" alt="Protoss" id="Valkiria"/>
+					</li>
+				</ul>
+				<form id="ingreso">		
+					<label for="nombrePersonaje">Personaje</label>
+					<input type="button" name="boton" value="Iniciar Juego" onClick="mostrarJuego()"/>
+				</form>
 </div>
-
+<p id="back">Volver al <a href="index.html">inicio</a> del juego</p>
+<div id="juego">
+		<canvas id="canvas" width="400" height="300"></canvas>
+			<img id="arriba" src="img/subir.jpg" title="Subir" width="50" height="50" alt="Subir" onClick="subir(personaje); moverEnemigos()"/>
+				<div id="botones">	
+					<img src="img/retroceder.jpg" title="Retroceder" width="50" height="50" alt="Retroceder" onClick="retroceder(personaje); moverEnemigos()"/>
+					<img src="img/bajar.jpg" title="Bajar" width="50" height="50" alt="Bajar" onClick="bajar(personaje); moverEnemigos()"/>
+					<img src="img/avanzar.jpg" title="Avanzar" width="50" height="50" alt="Avanzar" onClick="avanzar(personaje); moverEnemigos()"/>
+				</div>
+</div>
+</div>
 </body>
 </html>
