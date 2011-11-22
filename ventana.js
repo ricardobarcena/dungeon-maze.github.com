@@ -230,27 +230,37 @@ function colision(){
 			if(troll2.sx==orco.sx && troll2.sy==orco.sy){
 				moverEnemigos();
 			}
-				if(personaje.sx==troll.sx && personaje.sy==troll.sy){
-						alert('golpeaste al troll');
-						$('#arriba').hide();
-						$('#botones').hide();
-						$('#lucha').show();
-						
+				if(troll.sx==llave.sx && troll.sy==llave.sy){
+					moverEnemigos();
+				}
+					if(troll2.sx==llave.sx && troll2.sy==llave.sy){
+						moverEnemigos();
 					}
-						if(personaje.sx==troll2.sx && personaje.sy==troll2.sy){
-							alert('golpeaste al troll 2');
-							$('#arriba').hide();
-							$('#botones').hide();
-							$('#lucha').show();
-							
+						if(troll2.sx==llave.sx && troll2.sy==llave.sy){
+							moverEnemigos();
 						}
-							if(personaje.sx==orco.sx && personaje.sy==orco.sy){
-										alert('golpeaste al orco');
+						
+							if(personaje.sx==troll.sx && personaje.sy==troll.sy){
+									alert('golpeaste al troll');
+									$('#arriba').hide();
+									$('#botones').hide();
+									$('#lucha').show();
+									
+								}
+									if(personaje.sx==troll2.sx && personaje.sy==troll2.sy){
+										alert('golpeaste al troll 2');
 										$('#arriba').hide();
 										$('#botones').hide();
-										$('#lucha').show();	
-							}
-								if(personaje.sx==llave.sx && personaje.sy==llave.sy){
+										$('#lucha').show();
 										
-								}
+									}
+										if(personaje.sx==orco.sx && personaje.sy==orco.sy){
+													alert('golpeaste al orco');
+													$('#arriba').hide();
+													$('#botones').hide();
+													$('#lucha').show();	
+										}
+											if(personaje.sx==llave.sx && personaje.sy==llave.sy){
+													
+											}
 }
