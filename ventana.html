@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="estilo.css"/>
 </head>
 
-<body onLoad="init();">
+<body onLoad="init();" onkeydown="movimientoTeclado(event)">
 <div id="container3">
 	<h1>Ahora puedes comenzar a jugar a Dungeon Maze</h1>
 <div id="container2">
@@ -25,8 +25,8 @@
 					</li>
 				</ul>
 				<form id="ingreso">		
-					<label for="nombrePersonaje">Personaje</label>
-					<input type="button" name="boton" value="Iniciar Juego" onClick="mostrarJuego()"/>
+					<input id="personaje" for="nombrePersonaje"></label>
+					<input type="button" name="boton" value="Iniciar Juego" onClick="mostrarJuego(); dibujarFondo();"/>
 				</form>
 </div>
 <p id="back">Volver al <a href="index.html">inicio</a> del juego</p>

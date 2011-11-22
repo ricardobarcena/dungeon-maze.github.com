@@ -30,6 +30,7 @@
 			$('#Clérigo').css('border','none');
 			$('#Valkiria').css('border','none');
 			$('#'+personajes[index]).css('border','3px solid blue');
+			$('#personaje').attr('value', 'Jugarás con '+personajes[index]);
 		 }
     });
 });
@@ -43,18 +44,24 @@ function mostrarJuego(){
   var cwidth = 400;
   var cheight = 300;
   var ctx;
-  var everything = [];
-  var tid;
+  var mapa1 = [];
+  var mapa3 = [];
+  var mapa2 = [];
 
  /*************************************************/
  
-function myrectangle(sx,sy,swidth,sheight,stylestring){
+function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,dinero){
     this.sx = sx;
     this.sy = sy;
     this.swidth = swidth;
     this.sheight = sheight;
     this.fillstyle = stylestring;
     this.draw = drawrects;
+	this.ataque=ataque;
+	this.defensa=defensa;
+	this.dano=dano;
+	this.vida=vida;
+	this.dinero=dinero;
   }
   
   function drawrects(){
@@ -62,51 +69,87 @@ function myrectangle(sx,sy,swidth,sheight,stylestring){
     ctx.fillRect(this.sx,this.sy,this.swidth,this.sheight);
   }
   
-  var personaje = new myrectangle(0,0,20,20,"rgb(0,50,100)");
-  var troll = new myrectangle(120,40,20,20,"rgb(100,100,100)");
-  var troll2 = new myrectangle(120,140,20,20,"rgb(50,50,50)");
-  var orco = new myrectangle(100,240,20,20,"rgb(0,0,0)");
+  var personaje = new myrectangle(0,0,20,20,"rgb(0,50,100)",10,10,10,0);
+  var troll = new myrectangle(120,40,20,20,"rgb(100,100,100)",10,10,10,10,0);
+  var troll2 = new myrectangle(120,140,20,20,"rgb(50,50,50)",10,10,10,10,0);
+  var orco = new myrectangle(100,240,20,20,"rgb(0,0,0)",10,10,10,10,0);
+  var llave = new myrectangle(120,260,20,20,"rgb(255,255,9)",10,10,10,10,0);
   
-  everything.push(personaje);
-  everything.push(troll);
-  everything.push(troll2);
-  everything.push(orco);
+  mapa1.push(personaje);
+  mapa1.push(troll);
+  mapa1.push(troll2);
+  mapa1.push(orco);
+  mapa1.push(llave);
   
   function init(){
     ctx = document.getElementById('canvas').getContext('2d');
-    drawall();
+    draMap(mapa1);
   }
+  function dibujarFondo(){
+	var i;
+	var j;
+	var pasox=20;
+	var pasoy=20; 
+
+	ctx.beginPath();
+	   //lineas verticales
+		for(i=0; i<cwidth; i+=pasox){
+			ctx.moveTo(i,cheight);
+			ctx.lineTo(i,0);
+			ctx.stroke();
+		}
+		//lineas horizontales
+		for (j=0; j<cheight; j+=pasoy) {
+			ctx.moveTo(0,j);
+			ctx.lineTo(cwidth,j);
+			ctx.stroke();
+		}
+		ctx.closePath();
+};
   
-  function drawall(){
+  function draMap(map){
     ctx.clearRect(0,0,cwidth,cheight);
     var i;
-    for (i = 0; i < everything.length; i++){
-      everything[i].draw();
+    for (i = 0; i < map.length; i++){
+      map[i].draw();
     }
+	dibujarFondo();
   }
   
   function avanzar(personaje){
+	if(personaje.sx > 360){
+	return false;
+	}else{
     personaje.sx += Number(20);
-    drawall();
-    return false;  
+    draMap(mapa1);
+    return false;} 
   }
   
   function bajar(personaje){
-    personaje.sy += Number(20);
-    drawall();
-    return false;  
+    if(personaje.sy > 260){
+	return false;
+	}else{
+	personaje.sy += Number(20);
+    draMap(mapa1);
+    return false;}  
   }
   
   function retroceder(personaje){
-    personaje.sx += Number(-20);
-    drawall();
-    return false;  
+	if(personaje.sx < 20){
+	return false;
+	}else{
+    personaje.sx -= Number(20);
+    draMap(mapa1);
+    return false;}  
   }
   
   function subir(personaje){
-    personaje.sy += Number(-20);
-    drawall();
-    return false;  
+	if(personaje.sy < 20){
+	return false;
+	}else{
+    personaje.sy -= Number(20);
+    draMap(mapa1);
+    return false;}  
   }
   
   
@@ -145,3 +188,28 @@ var i;
 		}
 	}
 }
+
+function movimientoTeclado(direccion){
+			switch(direccion.keyCode){
+			case 87:   
+				subir(personaje); 
+				moverEnemigos();
+				break;
+				
+			case 65:   
+				retroceder(personaje); 
+				moverEnemigos();
+				break;
+			
+			case 83:   
+				bajar(personaje);
+				moverEnemigos();
+				break;
+				
+			case 68:   
+				avanzar(personaje);
+				moverEnemigos();
+				break;
+		}
+}
+
