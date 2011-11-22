@@ -94,9 +94,10 @@ margin:30px;
 text-align:left;
 }
 
-form{
+#ingreso{
 float:left;
 margin: 20px auto;
+padding-left:210px;
 }       
  
 #arriba{

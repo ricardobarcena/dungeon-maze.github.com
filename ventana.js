@@ -1,5 +1,6 @@
  /*Ventana.html*/
  	var seleccionado="";
+	var movimiento=true;
 	$(document).ready(function(){
 		$('#juego').hide();
 		$('#Guerrero').corner();
@@ -16,7 +17,7 @@
 				$('#'+this.id).css('border','none');  
 			}else{		
 				switch(this.id){
-				case 'Guerrero': index=0;
+				case 'Guerrero': index=0; 
 				break;
 				case 'Clérigo':index=1;
 				break;
@@ -45,13 +46,12 @@ function mostrarJuego(){
   var ctx;
   var mundo = [];
   var mapa1 = [];
-  var mapa3 = [];
   var mapa2 = [];
   mundo = mapa1;
 
  /*************************************************/
  
-function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,dinero){
+function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida){
     this.sx = sx;
     this.sy = sy;
     this.swidth = swidth;
@@ -62,7 +62,6 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
 	this.defensa=defensa;
 	this.dano=dano;
 	this.vida=vida;
-	this.dinero=dinero;
   }
   
   function drawrects(){
@@ -78,9 +77,6 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
   var orco3 = new myrectangle(100,240,20,20,"rgb(0,0,0)",10,12,20,10,0);
   var orco4 = new myrectangle(100,240,20,20,"rgb(0,0,0)",10,12,20,10,0);
   var llave = new myrectangle(120,260,20,20,"rgb(102,102,102)",0,0,0,0,0);
-  var moneda1 = new myrectangle(160,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
-  var moneda2 = new myrectangle(180,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
-  var moneda3 = new myrectangle(200,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
   var puerta = new myrectangle(380,0,20,20,"rgb(153,102,51)",0,0,0,0,0);
   
   mapa1.push(personaje);
@@ -88,19 +84,13 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
   mapa1.push(troll2);
   mapa1.push(orco);
   mapa1.push(llave);
-  mapa1.push(moneda1);
-  mapa1.push(moneda2);
-  mapa1.push(moneda3);
-  
+
   mapa2.push(personaje);
   mapa2.push(troll);
   mapa2.push(troll2);
   mapa2.push(orco);
   mapa2.push(orco2);
   mapa2.push(llave);
-  mapa2.push(moneda1);
-  mapa2.push(moneda2);
-  mapa2.push(moneda3);
    
   function init(){
     ctx = document.getElementById('canvas').getContext('2d');
@@ -138,44 +128,56 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
   }
   
   function avanzar(personaje){
-	if(personaje.sx > 360){
-	return false;
-	}else{
-    personaje.sx += Number(20);
-    draMap(mundo);
-	colision();
-    return false;} 
-  }
+	  if(movimiento==true){
+			if(personaje.sx > 360){
+				return false;
+			}else{
+				personaje.sx += Number(20);
+				draMap(mundo);
+				colision();
+				return false;
+			} 
+	  }
+ }
   
   function bajar(personaje){
-    if(personaje.sy > 260){
-	return false;
-	}else{
-	personaje.sy += Number(20);
-    draMap(mundo);
-	colision();
-    return false;}  
-  }
+	   if(movimiento==true){ 
+			if(personaje.sy > 260){
+				return false;
+			}else{
+				personaje.sy += Number(20);
+				draMap(mundo);
+				colision();
+				return false;
+			}  
+		}
+ }
   
   function retroceder(personaje){
-	if(personaje.sx < 20){
-	return false;
-	}else{
-    personaje.sx -= Number(20);
-    draMap(mundo);
-	colision();
-    return false;}  
+	if(movimiento==true){
+		if(personaje.sx < 20){
+			return false;
+			}else{
+				personaje.sx -= Number(20);
+				draMap(mundo);
+				colision();
+				return false;
+			}  
+		}
   }
   
   function subir(personaje){
-	if(personaje.sy < 20){
-	return false;
-	}else{
-    personaje.sy -= Number(20);
-    draMap(mundo);
-	colision();
-    return false;}  
-  }
+    if(movimiento==true){	
+		if(personaje.sy < 20){
+			return false;
+			}else{
+				personaje.sy -= Number(20);
+				draMap(mundo);
+				colision();
+				return false;
+			}  
+		}
+ }
   
 /*Movimiento de enemigos*/
 
@@ -264,37 +266,78 @@ function colision(){
 						}else{
 						
 							if(personaje.sx==troll.sx && personaje.sy==troll.sy){
-									//alert('golpeaste al troll');
 									$('#arriba').hide();
 									$('#botones').hide();
 									$('#lucha').show();
+									movimiento=false;
 									enemigo1=troll;
 								}else{
 									if(personaje.sx==troll2.sx && personaje.sy==troll2.sy){
-										//alert('golpeaste al troll 2');
 										$('#arriba').hide();
 										$('#botones').hide();
 										$('#lucha').show();
+										movimiento=false;
 										enemigo1=troll2;
 									}else{
 										if(personaje.sx==orco.sx && personaje.sy==orco.sy){
-													//alert('golpeaste al orco');
 													$('#arriba').hide();
 													$('#botones').hide();
 													$('#lucha').show();	
+													movimiento=false;
 													enemigo1=orco;
 										}else{
-											if(personaje.sx==llave.sx && personaje.sy==llave.sy){
-												mundo.splice(4,4);
-												mundo.push(puerta);
+											if(personaje.sx==orco2.sx && personaje.sy==orco2.sy){
+													$('#arriba').hide();
+													$('#botones').hide();
+													$('#lucha').show();	
+													movimiento=false;
+													enemigo1=orco2;
 											}else{
-												if(personaje.sx==puerta.sx && personaje.sy==puerta.sy){
-													mundo = mapa2;
-													personaje.sx=0;
-													personaje.sy=0;
+												if(personaje.sx==llave.sx && personaje.sy==llave.sy){
+													mundo.splice(4,4);
+													mundo.push(puerta);
+												}else{
+													if(personaje.sx==puerta.sx && personaje.sy==puerta.sy){
+														mundo = mapa2;
+														personaje.sx=0;
+														personaje.sy=0;
+													}
 												}
-											}}}}}}}}}}}
-
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+}
+function remover(){
+	var h;
+	for (h=0;h<mapa1.length;h++){
+		if(enemigo1==troll){
+			mundo.splice(1,1);
+			draMap(mundo);
+		}else{
+			if(enemigo1==troll2){
+				mundo.splice(2,1);
+				draMap(mundo);
+			}else{
+				if(enemigo1==orco){
+					mundo.splice(3,1);
+					draMap(mundo);
+				}else{
+					if(enemigo1==orco2){
+						mundo.splice(4,1);
+						draMap(mundo);
+				}
+			}
+		}		
+	}		
+}
+}
 function atacar(){
 	var dado = Math.floor(Math.random()*6)+1;
 	$('#dado').attr('value',''+dado);
@@ -308,6 +351,15 @@ function atacar(){
 			$('#dano').attr('value','Murió');
 		}
 	}else{
-		$('#dano').attr('value','No ha cambiado nada');
+		$('#dano').attr('value',''+enemigo1.vida);
 	}
+}
+
+function resetear(){
+	movimiento=true;
+	$("#boton").removeAttr('disabled');
+	$("#dado").attr('value','');
+	$("#ataque").attr('value','');
+	$("#dano").attr('value','');
+	$('#lucha').hide();	
 }

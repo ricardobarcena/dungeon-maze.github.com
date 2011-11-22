@@ -39,11 +39,12 @@
 						<img src="img/avanzar.jpg" title="Avanzar" width="50" height="50" alt="Avanzar" onClick="avanzar(personaje); moverEnemigos()"/>
 					</div>		
 </div>
-		<div id="lucha">
-				<label for="dados">Valor del dado: </label><input id="dado" for="numero"></input><input type="button" id="boton" name="boton" value="Atacar" onClick="atacar()"/><br/>
+		<form id="lucha">
+				<label for="dados">Valor del dado: </label><input id="dado" for="numero"></input><input type="button" id="boton" name="boton" value="Atacar" onClick="atacar()"></input><br/>
 				<label for="ataque">Valor del Ataque del Personaje: </label><input id="ataque" for="ataque"></input><br/>
-				<label for="hizodano">Vida del enemigo: </label><input id="dano"for="ataque"></input>
-		</div>
+				<label for="hizodano">Vida del enemigo: </label><input id="dano"for="ataque"></input><br/>
+				<input type="button" id="boton1" name="boton1" value="Continuar" onClick="resetear()"></input>
+		</form>
 </div>
 </body>
 </html>
