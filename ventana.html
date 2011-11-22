@@ -25,7 +25,7 @@
 					</li>
 				</ul>
 				<form id="ingreso">		
-					<input id="personaje" for="nombrePersonaje"></label>
+					<input id="personaje" for="nombrePersonaje"></input>
 					<input type="button" name="boton" value="Iniciar Juego" onClick="mostrarJuego(); dibujarFondo();"/>
 				</form>
 </div>
@@ -39,9 +39,11 @@
 						<img src="img/avanzar.jpg" title="Avanzar" width="50" height="50" alt="Avanzar" onClick="avanzar(personaje); moverEnemigos()"/>
 					</div>		
 </div>
-<div id="lucha">
-					<input type="button" name="boton" value="Atacar"/>
-</div>
+		<div id="lucha">
+				<label for="dados">Valor del dado: </label><input id="dado" for="numero"></input><input type="button" id="boton" name="boton" value="Atacar" onClick="atacar()"/><br/>
+				<label for="ataque">Valor del Ataque del Personaje: </label><input id="ataque" for="ataque"></input><br/>
+				<label for="hizodano">Vida del enemigo: </label><input id="dano"for="ataque"></input>
+		</div>
 </div>
 </body>
 </html>

@@ -47,7 +47,7 @@ function mostrarJuego(){
   var mapa1 = [];
   var mapa3 = [];
   var mapa2 = [];
-  mundo=mapa1;
+  mundo = mapa1;
 
  /*************************************************/
  
@@ -78,10 +78,10 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
   var orco3 = new myrectangle(100,240,20,20,"rgb(0,0,0)",10,12,20,10,0);
   var orco4 = new myrectangle(100,240,20,20,"rgb(0,0,0)",10,12,20,10,0);
   var llave = new myrectangle(120,260,20,20,"rgb(102,102,102)",0,0,0,0,0);
-  var moneda1=new myrectangle(160,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
-  var moneda2=new myrectangle(180,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
-  var moneda3=new myrectangle(200,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
-  var puerta=new myrectangle(380,0,20,20,"rgb(153,102,51)",0,0,0,0,0);
+  var moneda1 = new myrectangle(160,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
+  var moneda2 = new myrectangle(180,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
+  var moneda3 = new myrectangle(200,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
+  var puerta = new myrectangle(380,0,20,20,"rgb(153,102,51)",0,0,0,0,0);
   
   mapa1.push(personaje);
   mapa1.push(troll);
@@ -97,10 +97,11 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
   mapa2.push(troll2);
   mapa2.push(orco);
   mapa2.push(orco2);
+  mapa2.push(llave);
   mapa2.push(moneda1);
   mapa2.push(moneda2);
   mapa2.push(moneda3);
-  
+   
   function init(){
     ctx = document.getElementById('canvas').getContext('2d');
     draMap(mapa1);
@@ -239,8 +240,10 @@ function movimientoTeclado(direccion){
 				break;
 		}
 }
-function colision(){
 
+var enemigo1;
+
+function colision(){
 	if(troll.sx==troll2.sx && troll.sy==troll2.sy){
 		moverEnemigos();
 	}else{
@@ -259,42 +262,52 @@ function colision(){
 						if(troll2.sx==llave.sx && troll2.sy==llave.sy){
 							moverEnemigos();
 						}else{
+						
 							if(personaje.sx==troll.sx && personaje.sy==troll.sy){
-									alert('golpeaste al troll');
+									//alert('golpeaste al troll');
 									$('#arriba').hide();
 									$('#botones').hide();
 									$('#lucha').show();
+									enemigo1=troll;
 								}else{
 									if(personaje.sx==troll2.sx && personaje.sy==troll2.sy){
-										alert('golpeaste al troll 2');
+										//alert('golpeaste al troll 2');
 										$('#arriba').hide();
 										$('#botones').hide();
 										$('#lucha').show();
-										
+										enemigo1=troll2;
 									}else{
 										if(personaje.sx==orco.sx && personaje.sy==orco.sy){
-													alert('golpeaste al orco');
+													//alert('golpeaste al orco');
 													$('#arriba').hide();
 													$('#botones').hide();
 													$('#lucha').show();	
+													enemigo1=orco;
 										}else{
 											if(personaje.sx==llave.sx && personaje.sy==llave.sy){
-													mundo.splice(4,4);
-													mundo.push(puerta);
+												mundo.splice(4,4);
+												mundo.push(puerta);
 											}else{
 												if(personaje.sx==puerta.sx && personaje.sy==puerta.sy){
-													mundo=mapa2;
+													mundo = mapa2;
 													personaje.sx=0;
 													personaje.sy=0;
 												}
-												}
-											}
-										}
-									}
-							}
-						}
-					}
-				}
-			}
+											}}}}}}}}}}}
+
+function atacar(){
+	var dado = Math.floor(Math.random()*6)+1;
+	$('#dado').attr('value',''+dado);
+	$("#boton").attr("disabled", "disabled");
+	personaje.ataque = personaje.ataque+dado;
+	$('#ataque').attr('value', 'Ataque nuevo: '+personaje.ataque);
+	if(personaje.ataque>enemigo1.defensa){
+		enemigo1.vida -= enemigo1.dano;
+		$('#dano').attr('value',''+enemigo1.vida);
+		if(enemigo1.vida<=0){
+			$('#dano').attr('value','Murió');
 		}
+	}else{
+		$('#dano').attr('value','No ha cambiado nada');
 	}
+}
