@@ -15,13 +15,13 @@
 <h1>Elige tu avatar</h1>
 				<ul id="seleccionJugadores">
 					<li>
-						<img src="img/foto2.jpg" alt="Zerg" id="Guerrero"/>
+						<img src="img/foto2.jpg" alt="Guerrero" id="Guerrero"/>
 					</li>
 					<li>
-						<img src="img/foto1.jpg" alt="Terran" id="Clérigo"/>
+						<img src="img/foto1.jpg" alt="Clérigo" id="Clérigo"/>
 					</li>
 					<li>
-						<img src="img/foto3.jpg" alt="Protoss" id="Valkiria"/>
+						<img src="img/foto3.jpg" alt="Valkiria" id="Valkiria"/>
 					</li>
 				</ul>
 				<form id="ingreso">		
@@ -32,12 +32,15 @@
 <p id="back">Volver al <a href="index.html">inicio</a> del juego</p>
 <div id="juego">
 		<canvas id="canvas" width="400" height="300"></canvas>
-			<img id="arriba" src="img/subir.jpg" title="Subir" width="50" height="50" alt="Subir" onClick="subir(personaje); moverEnemigos()"/>
-				<div id="botones">	
-					<img src="img/retroceder.jpg" title="Retroceder" width="50" height="50" alt="Retroceder" onClick="retroceder(personaje); moverEnemigos()"/>
-					<img src="img/bajar.jpg" title="Bajar" width="50" height="50" alt="Bajar" onClick="bajar(personaje); moverEnemigos()"/>
-					<img src="img/avanzar.jpg" title="Avanzar" width="50" height="50" alt="Avanzar" onClick="avanzar(personaje); moverEnemigos()"/>
-				</div>
+		<img id="arriba" src="img/subir.jpg" title="Subir" width="50" height="50" alt="Subir" onClick="subir(personaje); moverEnemigos()"/>
+					<div id="botones">	
+						<img src="img/retroceder.jpg" title="Retroceder" width="50" height="50" alt="Retroceder" onClick="retroceder(personaje); moverEnemigos()"/>
+						<img src="img/bajar.jpg" title="Bajar" width="50" height="50" alt="Bajar" onClick="bajar(personaje); moverEnemigos()"/>
+						<img src="img/avanzar.jpg" title="Avanzar" width="50" height="50" alt="Avanzar" onClick="avanzar(personaje); moverEnemigos()"/>
+					</div>		
+</div>
+<div id="lucha">
+					<input type="button" name="boton" value="Atacar"/>
 </div>
 </div>
 </body>

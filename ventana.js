@@ -1,18 +1,18 @@
  /*Ventana.html*/
+ 	var seleccionado="";
 	$(document).ready(function(){
 		$('#juego').hide();
 		$('#Guerrero').corner();
 		$('#Clérigo').corner();
 		$('#Valkiria').corner();
-		var seleccionado="";
 		var personajes=['Guerrero','Clérigo','Valkiria'];
 		$('#ingreso').hide();
+		$('#lucha').hide();
 		
 		$('#seleccionJugadores li img').click(function(){
 			if(seleccionado==this.id){		
 				seleccionado="";
 				$('#ingreso').hide();
-				validarSeleccion=false;
 				$('#'+this.id).css('border','none');  
 			}else{		
 				switch(this.id){
@@ -23,7 +23,6 @@
 				case 'Valkiria': index=2; 		
 				break;
 				}
-
 			seleccionado=this.id;
 			$('#ingreso').show();
 			$('#Guerrero').css('border','none');
@@ -44,6 +43,7 @@ function mostrarJuego(){
   var cwidth = 400;
   var cheight = 300;
   var ctx;
+  var ctx2;
   var mapa1 = [];
   var mapa3 = [];
   var mapa2 = [];
@@ -70,10 +70,10 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
   }
   
   var personaje = new myrectangle(0,0,20,20,"rgb(0,50,100)",10,10,10,0);
-  var troll = new myrectangle(120,40,20,20,"rgb(100,100,100)",10,10,10,10,0);
-  var troll2 = new myrectangle(120,140,20,20,"rgb(50,50,50)",10,10,10,10,0);
-  var orco = new myrectangle(100,240,20,20,"rgb(0,0,0)",10,10,10,10,0);
-  var llave = new myrectangle(120,260,20,20,"rgb(255,255,9)",10,10,10,10,0);
+  var troll = new myrectangle(120,40,20,20,"rgb(0,204,0)",5,10,10,5,0);
+  var troll2 = new myrectangle(120,140,20,20,"rgb(255,0,51)",5,10,10,5,0);
+  var orco = new myrectangle(100,240,20,20,"rgb(51,153,255)",10,12,20,10,0);
+  var llave = new myrectangle(120,260,20,20,"rgb(255,255,102)",0,0,0,0,0);
   
   mapa1.push(personaje);
   mapa1.push(troll);
@@ -122,6 +122,7 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
 	}else{
     personaje.sx += Number(20);
     draMap(mapa1);
+	colision();
     return false;} 
   }
   
@@ -131,6 +132,7 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
 	}else{
 	personaje.sy += Number(20);
     draMap(mapa1);
+	colision();
     return false;}  
   }
   
@@ -140,6 +142,7 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
 	}else{
     personaje.sx -= Number(20);
     draMap(mapa1);
+	colision();
     return false;}  
   }
   
@@ -149,9 +152,9 @@ function myrectangle(sx,sy,swidth,sheight,stylestring,ataque,defensa,dano,vida,d
 	}else{
     personaje.sy -= Number(20);
     draMap(mapa1);
+	colision();
     return false;}  
   }
-  
   
 /*Movimiento de enemigos*/
 
@@ -194,22 +197,60 @@ function movimientoTeclado(direccion){
 			case 87:   
 				subir(personaje); 
 				moverEnemigos();
+				colision();
 				break;
 				
 			case 65:   
 				retroceder(personaje); 
 				moverEnemigos();
+				colision();
 				break;
 			
 			case 83:   
 				bajar(personaje);
 				moverEnemigos();
+				colision();
 				break;
 				
 			case 68:   
 				avanzar(personaje);
 				moverEnemigos();
+				colision();
 				break;
 		}
 }
+function colision(){
 
+	if(troll.sx==troll2.sx && troll.sy==troll2.sy){
+		moverEnemigos();
+	}
+		if(troll.sx==orco.sx && troll.sy==orco.sy){
+			moverEnemigos();
+		}
+			if(troll2.sx==orco.sx && troll2.sy==orco.sy){
+				moverEnemigos();
+			}
+				if(personaje.sx==troll.sx && personaje.sy==troll.sy){
+						alert('golpeaste al troll');
+						$('#arriba').hide();
+						$('#botones').hide();
+						$('#lucha').show();
+						
+					}
+						if(personaje.sx==troll2.sx && personaje.sy==troll2.sy){
+							alert('golpeaste al troll 2');
+							$('#arriba').hide();
+							$('#botones').hide();
+							$('#lucha').show();
+							
+						}
+							if(personaje.sx==orco.sx && personaje.sy==orco.sy){
+										alert('golpeaste al orco');
+										$('#arriba').hide();
+										$('#botones').hide();
+										$('#lucha').show();	
+							}
+								if(personaje.sx==llave.sx && personaje.sy==llave.sy){
+										
+								}
+}
